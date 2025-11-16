@@ -1,6 +1,7 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
-
+import RecipeDetails from './components/RecipeDetails';
 
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -12,11 +13,26 @@ function App() {
 
   return (
     <>
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>My Recipe App</h1>
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
+    <BrowserRouter>
+      <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+        <h1>My Recipe App</h1>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AddRecipeForm />
+                <RecipeList />
+              </>
+            }
+          />
+          <Route
+            path="/recipe/:id"
+            element={<RecipeDetailsWrapper />}
+          />
+        </Routes>
+      </div>
+    </BrowserRouter>
     
       <div>
         <a href="https://vite.dev" target="_blank">
@@ -41,5 +57,10 @@ function App() {
     </>
   )
 }
+import { useParams } from 'react-router-dom';
+const RecipeDetailsWrapper = () => {
+  const { id } = useParams();
+  return <RecipeDetails recipeId={Number(id)} />;
+};
 
 export default App
