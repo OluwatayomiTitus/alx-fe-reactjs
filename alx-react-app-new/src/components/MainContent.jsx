@@ -9,8 +9,7 @@ function MainContent() {
     >
       <h2 style={{ color: '#333' }}>Welcome to the main content!</h2>
       <p style={{ lineHeight: '1.6', color: '#555' }}>
-        This is where your main content goes. Add information, images, or anything
-        else relevant.
+        I love to visit New York, Paris, and Tokyo.
       </p>
     </main>
   );
