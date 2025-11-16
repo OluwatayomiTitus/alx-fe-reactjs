@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
+import SearchBar from './components/SearchBar';
 
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -22,6 +23,7 @@ function App() {
             element={
               <>
                 <AddRecipeForm />
+                <SearchBar />
                 <RecipeList />
               </>
             }
