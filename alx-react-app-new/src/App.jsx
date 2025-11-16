@@ -4,6 +4,8 @@ import Footer from './components/Footer';
 import MainContent from './components/MainContent'
 import UserProfile from './components/UserProfile';
 import Counter from './components/Counter';
+import ProfilePage from './ProfilePage';
+import UserContext from './UserContext';
 
 
 
@@ -15,6 +17,7 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
 
   return (
     <>
@@ -30,6 +33,9 @@ function App() {
   bio="Loves hiking and photography" 
 />
 <Counter />
+<UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
 
 
       <div>
