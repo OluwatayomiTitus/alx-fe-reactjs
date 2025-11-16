@@ -3,6 +3,8 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
+import FavoritesList from './components/FavoritesList';
+import RecommendationsList from './components/RecommendationsList';
 
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
@@ -11,6 +13,12 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const generateRecommendations = useRecipeStore(
+    (state) => state.generateRecommendations
+  );
+
+  // Recompute recommendations whenever homepage renders
+  generateRecommendations();
 
   return (
     <>
@@ -25,13 +33,12 @@ function App() {
                 <AddRecipeForm />
                 <SearchBar />
                 <RecipeList />
+                <FavoritesList />
+                <RecommendationsList />
               </>
             }
           />
-          <Route
-            path="/recipe/:id"
-            element={<RecipeDetailsWrapper />}
-          />
+          <Route path="/recipe/:id" element={<RecipeDetailsWrapper />} />
         </Routes>
       </div>
     </BrowserRouter>
