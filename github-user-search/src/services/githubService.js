@@ -8,9 +8,20 @@ export const fetchAdvancedUsers = async ({ username, location, minRepos }) => {
     if (location) query += `location:${location} `;
     if (minRepos) query += `repos:>=${minRepos}`;
 
-    const response = await axios.get(`https://api.github.com/search/users?q=${query}`);
+    const apiKey = import.meta.env.VITE_APP_GITHUB_API_KEY;
+
+    const response = await axios.get(
+      `https://api.github.com/search/users?q=${query}`,
+      {
+        headers: {
+          Authorization: `token ${apiKey}`,
+        },
+      }
+    );
+
     return response.data.items; // returns array of users
   } catch (error) {
-    throw error;
+    console.error("Error fetching users:", error);
+    return [];
   }
 };
