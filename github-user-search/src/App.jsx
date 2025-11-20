@@ -1,44 +1,45 @@
 import React, { useState } from "react";
 import Search from "./components/Search";
-import { fetchUserData } from "./services/githubService";
+import { fetchAdvancedUsers } from "./services/githubService";
 
 function App() {
-  const [userData, setUserData] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = async (username) => {
+  const handleSearch = async (criteria) => {
     setLoading(true);
     setError(null);
-    setUserData(null);
+    setUsers([]);
 
     try {
-      const data = await fetchUserData(username);
-      setUserData(data);
+      const results = await fetchAdvancedUsers(criteria);
+      setUsers(results);
     } catch (err) {
-      setError("Looks like we cant find the user");
+      setError("Looks like we cant find any users");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1>GitHub User Search</h1>
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">GitHub User Search</h1>
       <Search onSearch={handleSearch} />
 
-      {/* Conditional Rendering */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-      {userData && (
-        <div>
-          <img src={userData.avatar_url} alt={userData.login} width="100" />
-          <h2>{userData.name || userData.login}</h2>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            View Profile
-          </a>
-        </div>
-      )}
+      <div className="grid gap-4 mt-4">
+        {users.map((user) => (
+          <div key={user.id} className="border p-4 rounded shadow">
+            <img src={user.avatar_url} alt={user.login} width="80" className="rounded-full" />
+            <h2 className="font-semibold">{user.login}</h2>
+            <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
+              View Profile
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
