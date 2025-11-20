@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import { fetchAdvancedUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState("");
-  const [location, setLocation] = useState("");
-  const [minRepos, setMinRepos] = useState("");
-  const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (username.trim() === "") return;
+
     setLoading(true);
     setError(null);
-    setUsers([]);
+    setUserData(null);
 
     try {
-      const results = await fetchAdvancedUsers({ username, location, minRepos });
-      setUsers(results);
+      const data = await fetchUserData(username);
+      setUserData(data);
     } catch (err) {
-      setError("Looks like we cant find any users");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -27,7 +27,6 @@ function Search() {
 
   return (
     <div>
-      {/* Search Form */}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -35,37 +34,18 @@ function Search() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Enter location..."
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Minimum repositories..."
-          value={minRepos}
-          onChange={(e) => setMinRepos(e.target.value)}
-        />
         <button type="submit">Search</button>
       </form>
 
-      {/* Conditional Rendering */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
-
-      {/* Display Results */}
-      {users.length > 0 && (
+      {userData && (
         <div>
-          {users.map((user) => (
-            <div key={user.id}>
-              <img src={user.avatar_url} alt={user.login} width="80" />
-              <h2>{user.login}</h2>
-              <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-                View Profile
-              </a>
-            </div>
-          ))}
+          <img src={userData.avatar_url} alt={userData.login} width="100" />
+          <h2>{userData.name || userData.login}</h2>
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+            View Profile
+          </a>
         </div>
       )}
     </div>
