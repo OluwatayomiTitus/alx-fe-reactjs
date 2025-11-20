@@ -1,18 +1,13 @@
 import { useState } from "react";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [username, setUsername] = useState("");
 
   return (
-
     <div style={{ padding: "2rem" }}>
       <h1>GitHub User Search</h1>
-      <input
-        type="text"
-        placeholder="Search GitHub username..."
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+      <SearchBar username={username} setUsername={setUsername} />
     </div>
   );
 }
