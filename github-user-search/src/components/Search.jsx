@@ -1,42 +1,74 @@
 import React, { useState } from "react";
+import { fetchAdvancedUsers } from "../services/githubService";
 
-function Search({ onSearch }) {
+function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSearch({ username, location, minRepos });
+    setLoading(true);
+    setError(null);
+    setUsers([]);
+
+    try {
+      const results = await fetchAdvancedUsers({ username, location, minRepos });
+      setUsers(results);
+    } catch (err) {
+      setError("Looks like we cant find any users");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 max-w-md mx-auto">
-      <input
-        type="text"
-        placeholder="Enter GitHub username..."
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="border rounded p-2"
-      />
-      <input
-        type="text"
-        placeholder="Enter location..."
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        className="border rounded p-2"
-      />
-      <input
-        type="number"
-        placeholder="Minimum repositories..."
-        value={minRepos}
-        onChange={(e) => setMinRepos(e.target.value)}
-        className="border rounded p-2"
-      />
-      <button type="submit" className="bg-blue-500 text-white rounded p-2 hover:bg-blue-600">
-        Search
-      </button>
-    </form>
+    <div>
+      {/* Search Form */}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter GitHub username..."
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Enter location..."
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Minimum repositories..."
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      {/* Conditional Rendering */}
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      {/* Display Results */}
+      {users.length > 0 && (
+        <div>
+          {users.map((user) => (
+            <div key={user.id}>
+              <img src={user.avatar_url} alt={user.login} width="80" />
+              <h2>{user.login}</h2>
+              <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                View Profile
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
