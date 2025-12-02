@@ -1,48 +1,83 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { fetchUserData } from "../services/githubService";
 
-function Search({ onSearch }) {
+function Search() {
   const [username, setUsername] = useState("");
-  const [location, setLocation] = useState("");
-  const [minRepos, setMinRepos] = useState("");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    onSearch({ username, location, minRepos });
+    if (!username.trim()) return;
+
+    setLoading(true);
+    setError("");
+    setUser(null);
+
+    try {
+      const data = await fetchUserData(username);
+      setUser(data);
+    } catch (err) {
+      setError("Looks like we can't find the user");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 p-4 max-w-md mx-auto bg-white shadow rounded"
-    >
-      <input
-        type="text"
-        placeholder="Enter GitHub username..."
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <input
-        type="text"
-        placeholder="Enter location..."
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <input
-        type="number"
-        placeholder="Minimum repositories..."
-        value={minRepos}
-        onChange={(e) => setMinRepos(e.target.value)}
-        className="border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white rounded p-2 hover:bg-blue-700 transition"
-      >
-        Search
-      </button>
-    </form>
+    <div style={{ maxWidth: "400px", margin: "auto" }}>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search GitHub username…"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginBottom: "10px",
+            borderRadius: "6px",
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "10px",
+            background: "#000",
+            color: "#fff",
+            borderRadius: "6px",
+          }}
+        >
+          Search
+        </button>
+      </form>
+
+      {/* CONDITIONAL RENDERING */}
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+
+      {user && (
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <img
+            src={user.avatar_url}
+            alt="avatar"
+            width="100"
+            style={{ borderRadius: "50%" }}
+          />
+          <h3>{user.name || "No name provided"}</h3>
+          <a
+            href={user.html_url}
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "blue" }}
+          >
+            View Profile
+          </a>
+        </div>
+      )}
+    </div>
   );
 }
 
