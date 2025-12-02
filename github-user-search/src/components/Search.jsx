@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { advancedSearch } from "../services/githubService";
+import { advancedSearch, fetchUserData } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState("");
@@ -18,7 +18,7 @@ function Search() {
     try {
       const data = await advancedSearch(username, location, minRepos);
       setResults(data.items || []);
-    } catch (err) {
+    } catch {
       setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
@@ -67,11 +67,9 @@ function Search() {
         </button>
       </form>
 
-      {/* Feedback */}
       {loading && <p className="mt-4 text-center">Loading...</p>}
       {error && <p className="mt-4 text-center text-red-600">{error}</p>}
 
-      {/* RESULTS */}
       <div className="mt-6 space-y-4">
         {results.map((user) => (
           <div
@@ -89,8 +87,8 @@ function Search() {
               <a
                 href={user.html_url}
                 target="_blank"
-                className="text-blue-600 underline"
                 rel="noreferrer"
+                className="text-blue-600 underline"
               >
                 View Profile
               </a>
