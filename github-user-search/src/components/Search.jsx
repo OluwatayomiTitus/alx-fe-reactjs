@@ -19,7 +19,7 @@ function Search() {
       const data = await fetchUserData(username);
       setUser(data);
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -54,10 +54,10 @@ function Search() {
         </button>
       </form>
 
-      {/* CONDITIONAL RENDERING */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
+      {}
       {user && (
         <div style={{ marginTop: "20px", textAlign: "center" }}>
           <img
@@ -67,6 +67,7 @@ function Search() {
             style={{ borderRadius: "50%" }}
           />
           <h3>{user.name || "No name provided"}</h3>
+          <p>Username: {user.login}</p>
           <a
             href={user.html_url}
             target="_blank"
