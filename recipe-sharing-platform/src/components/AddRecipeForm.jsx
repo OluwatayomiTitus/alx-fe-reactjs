@@ -6,7 +6,6 @@ export default function AddRecipeForm() {
   const [steps, setSteps] = useState("");
   const [errors, setErrors] = useState("");
 
-  
   const validate = () => {
     const newErrors = {};
 
@@ -31,8 +30,8 @@ export default function AddRecipeForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4">Add New Recipe</h2>
+    <div className="max-w-xl md:max-w-2xl mx-auto mt-10 bg-white p-6 md:p-10 rounded-lg shadow">
+      <h2 className="text-2xl md:text-3xl font-bold mb-4">Add New Recipe</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
 
