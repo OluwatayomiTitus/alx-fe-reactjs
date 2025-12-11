@@ -3,42 +3,148 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Spaghetti",
+      "Eggs",
+      "Parmesan cheese",
+      "Bacon or pancetta",
+      "Black pepper",
+      "Salt"
+    ],
+    "instructions": [
+      "Boil the spaghetti until al dente.",
+      "Cook bacon until crispy.",
+      "Whisk eggs and parmesan in a bowl.",
+      "Add hot pasta to the bacon and remove from heat.",
+      "Mix in the egg mixture quickly to create a creamy sauce.",
+      "Season with black pepper and serve."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
-    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "summary": "Grilled chicken pieces cooked in a smooth, creamy tomato gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Chicken breast",
+      "Yogurt",
+      "Garlic and ginger",
+      "Tomato puree",
+      "Cream",
+      "Butter",
+      "Spices (cumin, paprika, garam masala, turmeric)"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt, garlic, ginger, and spices.",
+      "Grill or pan-cook the chicken until browned.",
+      "Heat butter, add spices, and cook tomato puree.",
+      "Add cream to form a rich sauce.",
+      "Add chicken pieces and simmer for 10–15 minutes."
+    ]
   },
   {
     "id": 3,
     "title": "Beef Stir Fry",
     "summary": "Quick Asian-style stir fry with tender beef strips and colorful vegetables.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Beef strips",
+      "Bell peppers",
+      "Carrots",
+      "Soy sauce",
+      "Garlic",
+      "Cornstarch",
+      "Oil"
+    ],
+    "instructions": [
+      "Marinate beef in soy sauce and a bit of cornstarch.",
+      "Stir fry beef on high heat until lightly browned.",
+      "Add vegetables and cook until tender-crisp.",
+      "Add garlic and more soy sauce if needed.",
+      "Mix and serve with rice or noodles."
+    ]
   },
   {
     "id": 4,
     "title": "Avocado Toast",
-    "summary": "Simple and healthy toast topped with mashed avocado, lime, and chili flakes.",
-    "image": "https://via.placeholder.com/150"
+    "summary": "Simple and healthy toast topped with mashed avocado and seasonings.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Bread slices",
+      "Avocado",
+      "Lime or lemon",
+      "Salt",
+      "Chili flakes"
+    ],
+    "instructions": [
+      "Toast the bread slices.",
+      "Mash avocado with lime and salt.",
+      "Spread the avocado mix on toast.",
+      "Sprinkle chili flakes and serve."
+    ]
   },
   {
     "id": 5,
     "title": "Shrimp Fried Rice",
     "summary": "Savory fried rice tossed with shrimp, eggs, peas, and soy sauce.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Cooked rice",
+      "Shrimp",
+      "Eggs",
+      "Peas and carrots",
+      "Soy sauce",
+      "Oil"
+    ],
+    "instructions": [
+      "Cook shrimp until pink and set aside.",
+      "Scramble eggs in a pan.",
+      "Add rice and vegetables to the pan.",
+      "Stir in soy sauce.",
+      "Add shrimp back and mix well."
+    ]
   },
   {
     "id": 6,
     "title": "Vegetable Soup",
-    "summary": "A warm and hearty blend of vegetables simmered in a light broth.",
-    "image": "https://via.placeholder.com/150"
+    "summary": "A warm and hearty blend of vegetables cooked in a light broth.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Carrots",
+      "Potatoes",
+      "Green beans",
+      "Onions",
+      "Vegetable broth",
+      "Salt and pepper"
+    ],
+    "instructions": [
+      "Chop all vegetables into small pieces.",
+      "Heat broth in a pot.",
+      "Add vegetables and simmer until tender.",
+      "Season with salt and pepper.",
+      "Serve warm."
+    ]
   },
   {
     "id": 7,
     "title": "Pancakes",
     "summary": "Fluffy golden pancakes perfect with honey, syrup, or berries.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "Flour",
+      "Milk",
+      "Egg",
+      "Sugar",
+      "Baking powder",
+      "Butter"
+    ],
+    "instructions": [
+      "Mix flour, sugar, and baking powder.",
+      "Whisk milk, egg, and melted butter separately.",
+      "Combine wet and dry ingredients.",
+      "Pour batter into a heated pan.",
+      "Cook until bubbles form, flip, and cook the other side."
+    ]
   }
 ]
