@@ -1,9 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 
 const fetchPosts = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  if (!res.ok) throw new Error("Failed to fetch posts");
-  return res.json();
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/posts"
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch posts");
+  }
+
+  return response.json();
 };
 
 function PostsComponent() {
@@ -12,12 +18,15 @@ function PostsComponent() {
     isLoading,
     isError,
     error,
-    isFetching,
     refetch,
+    isFetching,
   } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
     staleTime: 1000 * 60,
+    cacheTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: true,
+    keepPreviousData: true,
   });
 
   if (isLoading) return <p>Loading posts...</p>;
@@ -27,9 +36,9 @@ function PostsComponent() {
     <div>
       <h2>Posts</h2>
 
-      <p>{isFetching ? "Updating..." : "Loaded from cache"}</p>
+      <p>{isFetching ? "Updating data..." : "Data loaded from cache"}</p>
 
-      <button onClick={refetch}>Refetch</button>
+      <button onClick={refetch}>Refetch Posts</button>
 
       <ul>
         {data.slice(0, 5).map((post) => (
