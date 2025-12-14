@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
-
-const isAuthenticated = false; // simulate auth; set to true to allow access
+import useAuth from "../hooks/useAuth";
 
 function ProtectedRoute({ children }) {
-  if (!isAuthenticated) {
+  const { user } = useAuth();
+
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
